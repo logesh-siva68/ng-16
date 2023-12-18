@@ -1,0 +1,11 @@
+<section class="container-fluid">
+  <app-grid
+    [gridData] = "albumGridData"
+    [columns] = "columns"
+    (filter)="onFilterUser($event)"
+    [paginate] = "paginateUser"
+    (onPaginate)="paginateUserGrid()"
+  ></app-grid>
+  <!-- <router-outlet></router-outlet> -->
+</section>
+

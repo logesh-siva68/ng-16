@@ -1,0 +1,44 @@
+<div class="table-responsive">
+    <div>
+        <button class="btn btn-primary" (click)="showFilter = !showFilter"><i class="bi bi-filter"></i> Filter</button>
+    </div>
+    <table class="table" *ngIf="gridData">
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns"  (click)="onSort(column)">{{column.label}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="showFilter">
+                <td *ngFor="let column of columns">
+                    <input type="text" class="form-control" [(ngModel)]="column.filterValue" placeholder="Search" (input)="onFilter()" />
+                </td>
+            </tr>
+            <tr *ngFor='let gird of gridData; let i = index'>
+                <td>{{gird.id}}</td>
+                <td>{{gird.userId}}</td>
+                <td>{{gird.title}}</td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+    <div class="row pagination">
+        <div class="col-md-6 left">
+           <span>Row Per Page:</span> 
+           <span>
+                <select class="form-control" [(ngModel)]="paginate.itemsPerPage" (change)="paginateNumberOfItemPerPage()">
+                    <option>5</option>
+                    <option>10</option>
+                    <option>20</option>
+                </select>
+            </span>
+            <span> {{paginate.from || 1}} to {{paginate.to}} of {{paginate.totalItem}} item</span>
+        </div>
+        <div class="col-md-6 text-end">
+            <button type="button" class="btn btn-outline-primary" (click)="paginatePrevPage()">Prev</button>
+            <span> {{paginate.currentPage}} of {{paginate.totalPage}} Pages </span>
+            <button type="button" class="btn btn-outline-primary" (click)="paginateNextPage()">Next</button>
+        </div>
+    </div>
+    <p *ngIf="!gridData">No data found</p>
+</div>
