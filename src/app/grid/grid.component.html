@@ -5,7 +5,7 @@
     <table class="table" *ngIf="gridData">
         <thead>
             <tr>
-                <th *ngFor="let column of columns"  (click)="onSort(column)">{{column.label}}</th>
+                <th *ngFor="let column of columns"  (click)="sortTable(column)">{{column.label}}</th>
             </tr>
         </thead>
         <tbody>

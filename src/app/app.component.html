@@ -5,6 +5,7 @@
     (filter)="onFilterUser($event)"
     [paginate] = "paginateUser"
     (onPaginate)="paginateUserGrid()"
+    (onSort)="sortTable($event)"
   ></app-grid>
   <!-- <router-outlet></router-outlet> -->
 </section>

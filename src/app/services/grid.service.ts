@@ -54,12 +54,13 @@ export class GridService {
   paginateGrid(dataArr:any[], paginateDtl){
     paginateDtl.totalPage =  Math.ceil(dataArr.length / paginateDtl.itemsPerPage) || 1;
     paginateDtl.totalItem = dataArr.length
+    paginateDtl.currentPage = paginateDtl.currentPage > paginateDtl.totalPage ? paginateDtl.totalPage : paginateDtl.currentPage;
     paginateDtl.offSet =  paginateDtl.itemsPerPage  * (paginateDtl.currentPage - 1);
-    let from = ((paginateDtl.currentPage * paginateDtl.itemsPerPage) + 1) - paginateDtl.itemsPerPage;
+    let from = (((paginateDtl.currentPage * paginateDtl.itemsPerPage) + 1) - paginateDtl.itemsPerPage);
     let to = paginateDtl.currentPage * paginateDtl.itemsPerPage
-    paginateDtl.from = from > 0 ? from : 0
-    paginateDtl.to = paginateDtl.itemsPerPage >= paginateDtl.itemsPerPage ? to : paginateDtl.itemsPerPage 
-    paginateDtl.currentPage = paginateDtl.currentPage > paginateDtl.totalPage ? paginateDtl.totalPage : paginateDtl.currentPage 
+    paginateDtl.from = from 
+    paginateDtl.to =  to
+    
     return dataArr.slice(paginateDtl.offSet, paginateDtl.itemsPerPage * paginateDtl.currentPage)
   }
 }

@@ -28,6 +28,9 @@ export class GridComponent {
   @Output()
   onPaginate:EventEmitter<any> = new EventEmitter<any>()
 
+  @Output()
+  onSort:EventEmitter<any> = new EventEmitter<any>()
+
   constructor(private _grid: GridService){}
 
   ngOnChanges(){
@@ -42,10 +45,11 @@ export class GridComponent {
     this.filter.emit(query);
   }
 
-  onSort(col){
+  sortTable(col){
     if(!col.sort || col.sort === 'dsc') col.sort = 'asc';
     else col.sort = 'dsc';
-    this._grid.sortTable(this.gridData, col.key, col.sort);
+    this.onSort.emit(col)
+    
   }
 
   paginatePrevPage(){
